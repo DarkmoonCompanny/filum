@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Auth/Login.vue'
 import register from '../views/Auth/Register.vue'
+import dashboard from '../views/System/Home/Home.vue'
+import games from '../views/System/games/games.vue'
 
 import firebase from "firebase/app";
 import 'firebase/app';
@@ -24,14 +26,25 @@ const routes = [{
         name: 'register',
         component: register
     },
+    // {
+    //     path: "/home",
+    //     name: "home",
+    //     component: () =>
+    //         import ("../views/System/Home/Home.vue"),
+    //     meta: {
+    //         requiresAuth: true
+    //     },
+    // }
     {
-        path: "/home",
-        name: "home",
-        component: () =>
-            import ("../views/System/Home/Home.vue"),
+        path: '/home',
+        name: 'home',
+        components: {
+            default: dashboard,
+            as: games
+        },
         meta: {
             requiresAuth: true
-        },
+        }
     }
 ]
 

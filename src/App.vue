@@ -2,7 +2,7 @@
   <v-app>
     
       <router-view/>
-      <router-view class="view two" name="a"></router-view>
+      <router-view class="view two" name="as"></router-view>
   
   </v-app>
 </template>
