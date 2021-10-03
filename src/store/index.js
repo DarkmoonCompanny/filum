@@ -7,57 +7,57 @@ export default new Vuex.Store({
   state: {
     usuario: null,
     level: null,
-    lecciones: [{
-        'name': "Leccion 1",
-        desc: "Leccion 1",
+    Lecciònes: [{
+        'name': "Lecciòn 1",
+        desc: "Lecciòn 1",
         exp: 100,
         icon: "atom",
         color: "blue",
         block: false
       },
       {
-        'name': "Leccion 2",
-        desc: "Leccion 1",
+        'name': "Lecciòn 2",
+        desc: "Lecciòn 1",
         exp: 50,
         icon: "bacteria",
         color: "#0C3FA5",
         block: false
       },
       {
-        'name': "Leccion 3",
-        desc: "Leccion 1",
+        'name': "Lecciòn 3",
+        desc: "Lecciòn 1",
         exp: 80,
         icon: "beaker-outline",
         color: "#330CA5",
         block: false
       },
       {
-        'name': "Leccion 4",
-        desc: "Leccion 1",
+        'name': "Lecciòn 4",
+        desc: "Lecciòn 1",
         exp: 70,
         icon: "brain",
         color: "#A50CA5",
         block: false
       },
       {
-        'name': "Leccion 5",
-        desc: "Leccion 1",
+        'name': "Lecciòn 5",
+        desc: "Lecciòn 1",
         exp: 0,
         icon: "heart-pulse",
         color: "#00C41E",
         block: true
       },
       {
-        'name': "Leccion 6",
-        desc: "Leccion 1",
+        'name': "Lecciòn 6",
+        desc: "Lecciòn 1",
         exp: 0,
         icon: "rabbit",
         color: "#C43E00",
         block: true
       },
       {
-        'name': "Leccion 7",
-        desc: "Leccion 1",
+        'name': "Lecciòn 7",
+        desc: "Lecciòn 1",
         exp: 0,
         icon: "snake",
         color: "#3BC400",
@@ -80,6 +80,6 @@ export default new Vuex.Store({
   getters: {
     usuario: state => state.usuario,
     level: state => state.level,
-    lecciones: state => state.lecciones,
+    Lecciònes: state => state.Lecciònes,
   }
 })
