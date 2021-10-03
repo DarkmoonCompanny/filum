@@ -7,7 +7,7 @@
       ></v-app-bar-nav-icon>
 
       <v-toolbar-title style="font-family: Selima">
-        <span :class="titleColor" color="white"> FiLUM </span>
+        <span :class="titleColor" color="white"> Phylum </span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -160,6 +160,8 @@ export default {
       var usr = firebase.auth().currentUser;
       if (usr) {
         this.usuario = { name: usr.displayName, email: usr.email };
+      this.$store.commit('agregar',usr)
+
          var db = firebase.firestore();
       this.ref = db
         .collection("user")
@@ -169,7 +171,9 @@ export default {
             //console.log(querySnapshot.data());
             var data = querySnapshot.data();
             this.username = data.username
-      this.isLoading = false;
+            this.$store.commit('lvlAdd',data.level)
+
+            this.isLoading = false;
         });
       }
 
@@ -191,7 +195,7 @@ export default {
           this.$router.push("/home");
           break;
         case 1:
-          this.$router.push("/home");
+          this.$router.push("/clases");
           break;
         case 2:
           this.$router.push("/home");
@@ -204,7 +208,7 @@ export default {
   },
   computed: {
     color() {
-      //this.toProgram();
+      this.toProgram();
       switch (this.buttomActual) {
         case 0:
           return "green";

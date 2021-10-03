@@ -4,6 +4,7 @@ import Home from '../views/Auth/Login.vue'
 import register from '../views/Auth/Register.vue'
 import dashboard from '../views/System/Home/Home.vue'
 import games from '../views/System/games/games.vue'
+import clases from '../views/System/clases/clases.vue'
 
 import firebase from "firebase/app";
 import 'firebase/app';
@@ -41,6 +42,17 @@ const routes = [{
         components: {
             default: dashboard,
             as: games
+        },
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/clases',
+        name: 'clases',
+        components: {
+            default: dashboard,
+            as: clases
         },
         meta: {
             requiresAuth: true

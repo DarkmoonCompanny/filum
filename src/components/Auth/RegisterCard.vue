@@ -2,7 +2,16 @@
   <div class="divApp">
     <v-card elevation="2" class="mx-auto my-12" max-width="580">
       <v-card-title>
-        <Lottie :options="defaultOptions" :height="150" :width="150" />
+        <v-row align="center" class="mb-5">
+          <v-col align="center">
+            <v-img
+              lazy-src="https://picsum.photos/id/11/10/6"
+              max-height="150"
+              max-width="150"
+              src="../../assets/mico.jpeg"
+            ></v-img>
+          </v-col>
+        </v-row>
       </v-card-title>
 
       <v-card-subtitle class="mb-1">
@@ -10,7 +19,7 @@
       </v-card-subtitle>
 
       <v-card-text class="text--primary">
-         <v-row align="center" class="rowInput">
+        <v-row align="center" class="rowInput">
           <v-col cols="12">
             <v-text-field
               v-model="username"
@@ -20,9 +29,9 @@
           </v-col>
         </v-row>
 
-       <v-row align="center" class="rowInput">
+        <v-row align="center" class="rowInput">
           <v-col cols="12">
-              <v-select
+            <v-select
               v-model="selectSexo"
               :items="sexo"
               label="Sexo"
@@ -31,7 +40,7 @@
           </v-col>
         </v-row>
 
-       <v-row align="center" class="rowInput">
+        <v-row align="center" class="rowInput">
           <v-col cols="12">
             <v-text-field
               v-model="edad"
@@ -40,7 +49,6 @@
             />
           </v-col>
         </v-row>
-
 
         <v-row align="center" class="rowInput">
           <v-col cols="12">
@@ -51,7 +59,7 @@
             />
           </v-col>
         </v-row>
-      
+
         <v-row align="center" class="rowInput">
           <v-col cols="12">
             <v-text-field
@@ -99,7 +107,6 @@
 </template>
 <script>
 import * as animationData from "../../assets/animations/56997-dog-walking.json";
-import Lottie from "vue-lottie/src/lottie.vue";
 
 import firebase from "firebase/app";
 import "firebase/app";
@@ -107,18 +114,16 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export default {
-  components: {
-    Lottie,
-  },
+  components: {},
   methods: {
     Register() {
-      if(this.username == ""){
-          this.error = "Campo username vacio"
-          this.showError= true
-          this.loading=true
-        return false
+      if (this.username == "") {
+        this.error = "Campo username vacio";
+        this.showError = true;
+        this.loading = true;
+        return false;
       }
-     
+
       this.loading = true;
       var db = firebase.firestore();
       this.ref = db
@@ -135,15 +140,15 @@ export default {
         .catch(() => {
           //console.error("Error writing document: ", error);
         });
-        this.ref = db
+      this.ref = db
         .collection("user")
         .doc(this.email)
         .set({
           username: this.username,
           level: 1,
-          exp: 0 ,
+          exp: 0,
           edad: this.edad,
-          sexo: this.selectSexo
+          sexo: this.selectSexo,
         })
         .then((querySnapshot) => {
           console.log(querySnapshot);
@@ -158,15 +163,26 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.pswd)
         .then(() => {
+          this.$swal({
+            title: "Registro exitoso",
+            text: "Registro exitoso",
+            icon: "success",
+            confirmButtonText: "close",
+          });
           // Signed in
-          this.$router.replace('home')
+          this.$router.replace("home");
           // ...
         })
         .catch((error) => {
           this.error = error.message;
           this.showError = true;
           this.loading = false;
-
+          this.$swal({
+            title: "Error!",
+            text: "Empty fields",
+            icon: "error",
+            confirmButtonText: "close",
+          });
           // ..
         });
     },
@@ -179,12 +195,12 @@ export default {
       loding: 0,
       email: "",
       pswd: "",
-      edad:0,
+      edad: 0,
       error: "",
       username: "",
       showError: false,
-      selectSexo:"",
-      sexo: ['Hombre','Mujer','No definido'],
+      selectSexo: "",
+      sexo: ["Hombre", "Mujer", "No definido"],
       loading: false,
       //reglas para validar
       show: false,

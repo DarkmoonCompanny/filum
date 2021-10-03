@@ -4,11 +4,11 @@
       <v-alert v-model="showError" color="red" type="error" dismissible>{{
         error
       }}</v-alert>
-    <Lottie :options="defaultOptions" :height="150" :width="150"  />
+      <Lottie :options="defaultOptions" :height="150" :width="150" />
       <v-card-title aling="center" style="paddin: 0px" mb-2
         ><v-spacer></v-spacer>
         <h1>Login</h1>
-        
+
         <v-spacer></v-spacer>
       </v-card-title>
       <v-card-text>
@@ -34,27 +34,25 @@
           </v-col>
         </v-row>
 
-         <v-row class="btnLogin">
+        <v-row class="btnLogin">
           <v-col>
             <v-btn rounded color="green" dark block @click="Login">
               Login
             </v-btn>
           </v-col>
         </v-row>
-        
-        
       </v-card-text>
 
-     <v-card-actions >
-       <v-row>
-           <v-col class="mb-4">
-                 No tienes una cuenta? <a style="color=blue" @click="register">Registrate.</a>
-           </v-col>
-       </v-row>
-     </v-card-actions>
-      
+      <v-card-actions>
+        <v-row>
+          <v-col class="mb-4">
+            No tienes una cuenta?
+            <a style="color=blue" @click="register">Registrate.</a>
+          </v-col>
+        </v-row>
+      </v-card-actions>
     </v-card>
-     <v-overlay v-model="loading">
+    <v-overlay v-model="loading">
       <v-row> </v-row>
       <v-row>
         <v-spacer></v-spacer>
@@ -70,8 +68,8 @@
   </div>
 </template>
 <script>
-import * as animationData from '../../assets/animations/animal.json'
-import Lottie from 'vue-lottie/src/lottie.vue'
+import * as animationData from "../../assets/animations/animal.json";
+import Lottie from "vue-lottie/src/lottie.vue";
 
 import firebase from "firebase/app";
 import "firebase/app";
@@ -79,29 +77,29 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export default {
-    components: {
-      Lottie
+  components: {
+    Lottie,
   },
   methods: {
     Login() {
-          this.loading = true;
-        firebase
+      this.loading = true;
+      firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.pswd)
-          .then( () =>  {
-            this.loading = false;
+        .then(() => {
+          this.loading = false;
 
-            this.$router.push('home')
-          })
-          .catch(error =>{
-            this.error= error.message
-            this.showError=true;
-          });
-          
+          this.$router.push("home");
+        })
+        .catch((error) => {
+          this.error = error.message;
+          this.loading = false;
+          this.showError = true;
+        });
     },
-      register(){
-        this.$router.push('register')
-      }
+    register() {
+      this.$router.push("register");
+    },
   },
   data() {
     return {
@@ -115,12 +113,11 @@ export default {
       rules: {
         required: (value) => !!value || "Required.",
       },
-                  defaultOptions: {
-                animationData: animationData.default
-            }
+      defaultOptions: {
+        animationData: animationData.default,
+      },
     };
   },
-  
 };
 </script>
 <style scoped>
