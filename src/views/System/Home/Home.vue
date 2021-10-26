@@ -23,7 +23,7 @@
       <v-img src=""></v-img>
       <v-list-item>
         <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+          <v-img :src="perfil"></v-img>
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -34,7 +34,7 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item @click="dialogPerfil = true" link>
+        <v-list-item @click="dperfil" link>
           <v-list-item-icon>
             <v-icon>mdi-account-box</v-icon>
           </v-list-item-icon>
@@ -44,15 +44,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item active link>
-          <v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
@@ -94,12 +86,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn  >
-        <span >Info</span>
-
-        <v-icon  >mdi-map-marker</v-icon>
-      </v-btn>
-  <v-spacer></v-spacer>
+   
 
       <v-btn  >
         <span >Games</span>
@@ -148,6 +135,7 @@ export default {
       loadingLog: false,
       dialogPerfil: false,
       username: "",
+      perfil: "",
     };
   },
   setup() {},
@@ -171,11 +159,20 @@ export default {
             //console.log(querySnapshot.data());
             var data = querySnapshot.data();
             this.username = data.username
+             var images = require.context('../../../assets/personajes/', false, /\.png$/)
+            this.perfil = images("./"+data.avatar)
+      this.$store.commit('avatar',data.avatar)
+
+            console.log(this.perfil);
             this.$store.commit('lvlAdd',data.level)
 
             this.isLoading = false;
         });
       }
+
+    },
+    dperfil(){
+          this.$router.push("/ajustes");
 
     },
     logOut() {
@@ -195,7 +192,8 @@ export default {
           this.$router.push("/home");
           break;
         case 1:
-          this.$router.push("/clases");
+          this.$router.push("/home");
+
           break;
         case 2:
           this.$router.push("/home");

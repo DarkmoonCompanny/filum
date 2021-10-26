@@ -1,5 +1,8 @@
 <template>
-  <v-timeline
+<div>
+  <h1>{{  periodo }}</h1>
+
+   <v-timeline
     align-top
     :dense="$vuetify.breakpoint.smAndDown"
     class="mb-15 mr-5 ml-5"
@@ -16,18 +19,21 @@
     </v-timeline-item>
   </v-timeline>
 
+</div>
+ 
   
 </template>
 <script>
 import itemclase from "../../../components/Home/clases.vue";
 
 export default {
+  props:['periodo'],
   components: {
     itemclase,
   },
   data() {
     return {
-      lecciones:this.$store.state.lecciones,
+      lecciones:this.$store.state.Lecciones,
     };
   },
   setup() {},

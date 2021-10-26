@@ -2,7 +2,7 @@
   <v-app>
     
       <router-view/>
-      <router-view class="view two" name="as"></router-view>
+      <router-view class="view two ww" name="as" ></router-view>
   
   </v-app>
 </template>
@@ -17,3 +17,8 @@ export default {
   }),
 };
 </script>
+<style scoped>
+.ww{
+width: 100%;
+}
+</style>
