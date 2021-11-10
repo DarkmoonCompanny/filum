@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     usuario: null,
     level: null,
-    avatar: null,
+        usuariobd: null,
+        avatar: null,
     Lecciones: [{
         'name': "Lecciòn 1",
         desc: "Lecciòn 1",
@@ -76,7 +77,10 @@ export default new Vuex.Store({
     },
     avatar: function (state, lvl) {
       state.avatar = lvl
-    }
+    },
+    agregarUserbd: function(state, user) {
+      state.usuariobd = user
+  },
   },
   actions: {},
   modules: {},
@@ -85,5 +89,7 @@ export default new Vuex.Store({
     level: state => state.level,
     Lecciones: state => state.Lecciones,
     avatar: state => state.avatar,
+    usuariobd: state => state.usuariobd,
+
   }
 })

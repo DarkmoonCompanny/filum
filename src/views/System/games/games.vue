@@ -1,74 +1,176 @@
 <template>
-<div >
-  <v-spacer></v-spacer>
- <v-row class="mr-5 ml-5 mt-10" >
-        <v-col class="img-game ">
-          <h1>Células</h1>
-          <v-img
-          @click="irClase(0)"
-            lazy-src="https://picsum.photos/id/11/10/6"
-            max-height="100"
-            src="../../../assets/lecciones/1.png"
-          ></v-img>
-        </v-col>
-      </v-row>
+  <div>
+    <v-spacer></v-spacer>
+    <v-row class="mr-5 ml-5 mt-10">
+      <v-col class="img-game">
+        <h1>Células</h1>
+        <v-img
+          lazy-src="https://picsum.photos/id/11/10/6"
+          max-height="100"
+            @click="irClase('https://maritzabelserna.wixsite.com/phylum', 2)"
+          src="../../../assets/lecciones/1.png"
+        ></v-img>
+      </v-col>
+    </v-row>
 
-      <v-row  class="mr-5 ml-5 mt-10">
-        <v-col class="img-game" style="margin-top:30px">
+    <div v-if="levelcan > 1">
+      <v-row class="mr-5 ml-5 mt-10">
+        <v-col class="img-game" style="margin-top: 30px">
           <h1>Sistemas</h1>
 
           <v-img
-           
             lazy-src="https://picsum.photos/id/11/10/6"
-                       max-height="100"
-
+            @click="irClase('https://michellgbv15.wixsite.com/phylum', 3)"
+            max-height="100"
             src="../../../assets/lecciones/2.png"
           ></v-img>
         </v-col>
       </v-row>
-np
+    </div>
 
-      <v-row  class="mr-5 ml-5 mt-10"> 
-         <v-col class="img-game bloqueado" style="margin-top:30px">
-           <h1>Genética</h1>
+    <div v-else>
+      <v-row class="mr-5 ml-5 mt-10">
+        <v-col class="img-game bloqueado" style="margin-top: 30px">
+          <h1>Sistemas</h1>
+
           <v-img
-            
             lazy-src="https://picsum.photos/id/11/10/6"
-                      max-height="100"
+            max-height="100"
+            src="../../../assets/lecciones/2.png"
+          ></v-img>
+        </v-col>
+      </v-row>
+    </div>
 
+    <div v-if="levelcan > 2">
+      <v-row class="mr-5 ml-5 mt-10">
+        <v-col class="img-game" style="margin-top: 30px">
+          <h1>Genética</h1>
+          <v-img
+            @click="irClase('https://sandiavides.wixsite.com/genetica', 4)"
+            lazy-src="https://picsum.photos/id/11/10/6"
+            max-height="100"
             src="../../../assets/lecciones/3.png"
           ></v-img>
         </v-col>
       </v-row>
+    </div>
 
+    <div v-else>
+      <v-row class="mr-5 ml-5 mt-10">
+        <v-col class="img-game " style="margin-top: 30px">
+          <h1>Genética</h1>
+          <v-img
+            lazy-src="https://picsum.photos/id/11/10/6"
+            max-height="100"
+            src="../../../assets/lecciones/3.png"
+          ></v-img>
+        </v-col>
+      </v-row>
+    </div>
 
-      <v-row  class="mr-5 ml-5 mt-10">
-         <v-col  class="img-game bloqueado" style="margin-top:10px ;margin-bottom:60px">
-          <h1 >Ecosistemas</h1>
+    <div v-if="levelcan > 3">
+      <v-row class="mr-5 ml-5 mt-10">
+        <v-col
+          class="img-game "
+          style="margin-top: 10px; margin-bottom: 60px"
+        >
+          <h1>Ecosistemas</h1>
 
           <v-img
-           
             lazy-src="https://picsum.photos/id/11/10/6"
-                       max-height="100"
-
+            max-height="100"
             src="../../../assets/lecciones/4.png"
           ></v-img>
         </v-col>
       </v-row>
+    </div>
 
-  
-</div>
-     
+    <div v-else>
+      <v-row class="mr-5 ml-5 mt-10">
+        <v-col
+          class="img-game bloqueado"
+          style="margin-top: 10px; margin-bottom: 60px"
+        >
+          <h1>Ecosistemas</h1>
+
+          <v-img
+            lazy-src="https://picsum.photos/id/11/10/6"
+            max-height="100"
+            src="../../../assets/lecciones/4.png"
+          ></v-img>
+        </v-col>
+      </v-row>
+    </div>
+  </div>
 </template>
 <script>
-export default {
-  setup() {},
-  methods:{
-    irClase(index){
-          this.$router.push("/clases/"+index);
+import firebase from "firebase/app";
+import "firebase/app";
+import "firebase/auth";
 
-    }
-  }
+export default {
+  data() {
+    return {
+      usuario: this.$store.state.usuariobd,
+      levelcan:this.$store.state.usuariobd.level,
+    };
+  },
+  setup() {},
+    mounted() {
+    this.loadPerfil2();
+  },
+  methods: {
+    irClase(index, levelcan2) {
+      var win = window.open(index, "_blank");
+      win.focus();
+      var usr = firebase.auth().currentUser;
+
+      var db = firebase.firestore();
+      var us = this.usuario;
+      console.log(this.usuario);
+      console.log(this.levelcan);
+      //var level = this.usuario.level;
+
+
+        this.ref = db
+          .collection("user")
+          .doc(usr.email)
+          .set({
+            avatar: us.avatar,
+            edad: us.edad,
+            exp: us.exp + 10,
+            level: levelcan2,
+            sexo: us.sexo,
+            username: us.username,
+          });
+        this.loadPerfil2();
+          this.$router.push("/games");
+
+    },
+    loadPerfil2() {
+      // this.isLoading = true;
+      var usr = firebase.auth().currentUser;
+      //metemos en local el usuario
+      this.$store.commit("agregar", usr);
+      if (usr) {
+        //this.usuario = { name: usr.displayName, email: usr.email };
+        var db = firebase.firestore();
+        this.ref = db
+          .collection("user")
+          .doc(usr.email)
+          .get()
+          .then((querySnapshot) => {
+            //console.log(querySnapshot.data());
+            var data = querySnapshot.data();
+            this.$store.commit("agregarUserbd", data);
+            this.usuario = data;
+            this.levelcan = data.level;
+            console.log(this.usuario);
+          });
+      }
+    },
+  },
 };
 </script>
 <style scoped>

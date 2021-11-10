@@ -253,8 +253,8 @@ export default {
   components: {},
   methods: {
     Register() {
-      if (this.username == "") {
-        this.error = "Campo username vacio";
+      if (this.username == "" && this.email.split("@")[1] != "colsam.com.co") {
+        this.error = "Campo username o email invalido";
         this.showError = true;
         this.loading = true;
         return false;

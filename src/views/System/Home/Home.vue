@@ -49,7 +49,7 @@
       <template v-slot:append>
         <div class="pa-2">
           <v-btn block :color="color" style="color: white" @click="logOut">
-            Logout
+            Log out
           </v-btn>
         </div>
       </template>
@@ -86,16 +86,12 @@
 
       <v-spacer></v-spacer>
 
-   
-
-      <v-btn  >
+          <v-btn >             
         <span >Games</span>
-
-        <v-icon  >mdi-google-controller</v-icon>
+        <v-icon  >mdi-google-controller</v-icon>     
       </v-btn>
- 
-
       <v-spacer></v-spacer>
+
     </v-bottom-navigation>
 
 
@@ -192,7 +188,7 @@ export default {
           this.$router.push("/home");
           break;
         case 1:
-          this.$router.push("/home");
+          this.$router.push("/games");
 
           break;
         case 2:
@@ -209,7 +205,7 @@ export default {
       this.toProgram();
       switch (this.buttomActual) {
         case 0:
-          return "green";
+          return "red";
         case 1:
           return "blue";
         case 2:

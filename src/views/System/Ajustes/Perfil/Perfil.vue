@@ -1,5 +1,14 @@
 <template>
   <div>
+    <v-row>
+      <v-col>
+        <v-progress-linear
+          v-model="level2"
+          color="amber"
+          height="25"
+        >Level {{ levelcan }} </v-progress-linear>
+      </v-col>
+    </v-row>
     <v-spacer></v-spacer>
     <transition name="slide-fade">
       <v-row v-if="show1">
@@ -13,21 +22,17 @@
 
             <v-card-text class="text-center">
               <div>
-
                 <v-row>
-    <v-spacer></v-spacer>
+                  <v-spacer></v-spacer>
 
                   <v-col class="text-center mb-10">
-
                     <v-img
                       :src="getImgUrl()"
                       max-height="500"
                       max-width="500"
                     ></v-img>
-
                   </v-col>
-    <v-spacer></v-spacer>
-
+                  <v-spacer></v-spacer>
                 </v-row>
 
                 <v-row>
@@ -119,6 +124,8 @@ export default {
       loadingLog: false,
       imgGuardar: null,
       dialog: false,
+      levelcan: 0,
+      level2:0,
       msg: { title: "", body: "" },
       rules: [
         (value) => !!value || "Required.",
@@ -129,6 +136,7 @@ export default {
   mounted() {
     this.show1 = true;
     this.showBtn = true;
+    this.loadPerfil2();
   },
   methods: {
     actualizarPerfil() {
@@ -155,6 +163,28 @@ export default {
 
           // ..
         });
+    },
+
+    loadPerfil2() {
+      // this.isLoading = true;
+      var usr = firebase.auth().currentUser;
+      //metemos en local el usuario
+      this.$store.commit("agregar", usr);
+      if (usr) {
+        //this.usuario = { name: usr.displayName, email: usr.email };
+        var db = firebase.firestore();
+        this.ref = db
+          .collection("user")
+          .doc(usr.email)
+          .get()
+          .then((querySnapshot) => {
+            //console.log(querySnapshot.data());
+            var data = querySnapshot.data();
+            this.levelcan = data.level;
+            this.level2 = data.level * 25;
+            // console.log(this.usuario);
+          });
+      }
     },
     irPerfil() {
       this.$router.push("/ajustes/perfil");

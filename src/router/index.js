@@ -72,8 +72,8 @@ const routes = [{
         }
     },
     {
-        path: '/clases/:periodo',
-        name: 'clases',
+        path: '/games',
+        name: 'games',
         components: {
             default: dashboard,
             as: clases
