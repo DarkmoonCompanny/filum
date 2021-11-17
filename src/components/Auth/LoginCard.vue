@@ -7,7 +7,7 @@
       <Lottie :options="defaultOptions" :height="150" :width="150" />
       <v-card-title aling="center" style="paddin: 0px" mb-2
         ><v-spacer></v-spacer>
-        <h1>Login</h1>
+        <h1>Ingresar</h1>
 
         <v-spacer></v-spacer>
       </v-card-title>
@@ -16,7 +16,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="email"
-              label="Email"
+              label="Correo"
               :rules="[rules.required]"
             />
           </v-col>
@@ -25,7 +25,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="pswd"
-              label="Password"
+              label="Contraseña"
               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show ? 'text' : 'password'"
               :rules="[rules.required]"
@@ -37,7 +37,7 @@
         <v-row class="btnLogin">
           <v-col>
             <v-btn rounded color="green" dark block @click="Login">
-              Login
+              Ingresar
             </v-btn>
           </v-col>
         </v-row>

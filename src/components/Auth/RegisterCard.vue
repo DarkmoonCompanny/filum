@@ -15,7 +15,7 @@
       </v-card-title>
 
       <v-card-subtitle class="mb-1">
-        <h1>Register</h1>
+        <h1>Registro</h1>
       </v-card-subtitle>
 
       <v-card-text class="text--primary">
@@ -23,7 +23,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="username"
-              label="Username"
+              label="Nombre usuario"
               :rules="[rules.required]"
             />
           </v-col>
@@ -54,7 +54,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="email"
-              label="Email"
+              label="Correo"
               :rules="[rules.required]"
             />
           </v-col>
@@ -64,7 +64,7 @@
           <v-col cols="12">
             <v-text-field
               v-model="pswd"
-              label="Password"
+              label="Contraseña"
               :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show ? 'text' : 'password'"
               :rules="[rules.required]"
@@ -75,7 +75,7 @@
         <v-row>
           <v-col>
             <v-btn color="primary" dark @click="dialog = true">
-              Select Avatar
+              Selecciona tu avatar
             </v-btn>
           </v-col>
         </v-row>
@@ -91,7 +91,7 @@
         <v-row>
           <v-col class="mb-4">
             Ya tienes una cuenta?
-            <a style="color=blue" @click="logisn">Login.</a>
+            <a style="color=blue" @click="logisn">Ingresa.</a>
           </v-col>
         </v-row>
       </v-card-actions>
@@ -100,7 +100,7 @@
     <v-dialog v-model="dialog">
       <v-card>
         <v-card-title class="text-h5 blue dark" style="color: white">
-          Seleccione avatar
+          Seleccionar avatar
         </v-card-title>
 
         <v-card-text>
@@ -221,7 +221,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false"> I accept </v-btn>
+          <v-btn color="primary" text @click="dialog = false"> Escoger </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -344,7 +344,7 @@ export default {
       foto: "1.png",
       showError: false,
       selectSexo: "",
-      sexo: ["Hombre", "Mujer", "No definido"],
+      sexo: ["Hombre", "Mujer"],
       loading: false,
       //reglas para validar
       show: false,

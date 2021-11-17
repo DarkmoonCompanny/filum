@@ -80,14 +80,14 @@
       <v-spacer></v-spacer>
       
         <v-btn >             
-        <span >Home</span>
+        <span >Inicio</span>
         <v-icon  >mdi-home</v-icon>     
       </v-btn>
 
       <v-spacer></v-spacer>
 
           <v-btn >             
-        <span >Games</span>
+        <span >Juegos</span>
         <v-icon  >mdi-google-controller</v-icon>     
       </v-btn>
       <v-spacer></v-spacer>
