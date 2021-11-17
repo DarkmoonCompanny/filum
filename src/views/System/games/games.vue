@@ -7,7 +7,7 @@
         <v-img
           lazy-src="https://picsum.photos/id/11/10/6"
           max-height="100"
-            @click="irClase('https://maritzabelserna.wixsite.com/phylum', 2)"
+            @click="irClase('https://maritzabelserna.wixsite.com/my-site-8', 2)"
           src="../../../assets/lecciones/1.png"
         ></v-img>
       </v-col>
@@ -78,6 +78,7 @@
           <h1>Ecosistemas</h1>
 
           <v-img
+            @click="irClase('https://veraamaya715.wixsite.com/my-site-1', 4)"
             lazy-src="https://picsum.photos/id/11/10/6"
             max-height="100"
             src="../../../assets/lecciones/4.png"
