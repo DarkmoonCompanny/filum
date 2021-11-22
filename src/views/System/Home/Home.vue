@@ -43,8 +43,6 @@
             <v-list-item-title>Perfil</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-        
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
@@ -54,17 +52,17 @@
         </div>
       </template>
     </v-navigation-drawer>
-<!--Bottoms Navigation-->
-  <!--end view -->
-  <v-dialog
-    v-model="dialogPerfil"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
+    <!--Bottoms Navigation-->
+    <!--end view -->
+    <v-dialog
+      v-model="dialogPerfil"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
     >
-  <perfil @closePerfil="dialogPerfil = false"/>
+      <perfil @closePerfil="dialogPerfil = false" />
     </v-dialog>
-    
+
     <!-- Bottom navigation -->
     <v-bottom-navigation
       v-model="buttomActual"
@@ -78,23 +76,20 @@
       scroll-target="#hide-on-scroll-example"
     >
       <v-spacer></v-spacer>
-      
-        <v-btn >             
-        <span >Inicio</span>
-        <v-icon  >mdi-home</v-icon>     
+
+      <v-btn>
+        <span>Inicio</span>
+        <v-icon>mdi-home</v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
 
-          <v-btn >             
-        <span >Juegos</span>
-        <v-icon  >mdi-google-controller</v-icon>     
+      <v-btn>
+        <span>Juegos</span>
+        <v-icon>mdi-google-controller</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-
     </v-bottom-navigation>
-
-
 
     <!--Lodings -->
 
@@ -144,32 +139,34 @@ export default {
       var usr = firebase.auth().currentUser;
       if (usr) {
         this.usuario = { name: usr.displayName, email: usr.email };
-      this.$store.commit('agregar',usr)
+        this.$store.commit("agregar", usr);
 
-         var db = firebase.firestore();
-      this.ref = db
-        .collection("user")
-        .doc(usr.email)
-        .get()
-        .then((querySnapshot) => {
+        var db = firebase.firestore();
+        this.ref = db
+          .collection("user")
+          .doc(usr.email)
+          .get()
+          .then((querySnapshot) => {
             //console.log(querySnapshot.data());
             var data = querySnapshot.data();
-            this.username = data.username
-             var images = require.context('../../../assets/personajes/', false, /\.png$/)
-            this.perfil = images("./"+data.avatar)
-      this.$store.commit('avatar',data.avatar)
+            this.username = data.username;
+            var images = require.context(
+              "../../../assets/personajes/",
+              false,
+              /\.png$/
+            );
+            this.perfil = images("./" + data.avatar);
+            this.$store.commit("avatar", data.avatar);
 
             console.log(this.perfil);
-            this.$store.commit('lvlAdd',data.level)
+            this.$store.commit("lvlAdd", data.level);
 
             this.isLoading = false;
-        });
+          });
       }
-
     },
-    dperfil(){
-          this.$router.push("/ajustes");
-
+    dperfil() {
+      this.$router.push("/ajustes");
     },
     logOut() {
       this.loadingLog = true;

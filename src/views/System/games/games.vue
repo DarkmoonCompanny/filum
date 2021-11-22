@@ -1,5 +1,23 @@
 <template>
   <div>
+    <v-row v-if="levelcan > 3">
+      <v-spacer></v-spacer>
+
+      <v-col class="mr-5 ml-5 mt-5">
+        <v-btn
+          class="ma-2"
+          @click="modal = true"
+          large
+          color="primary"
+          fab
+          dark
+        >
+          <v-icon>mdi-eye</v-icon> 
+        </v-btn>
+        Ver Certificado
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
     <v-spacer></v-spacer>
     <v-row class="mr-5 ml-5 mt-10">
       <v-col class="img-game">
@@ -7,7 +25,7 @@
         <v-img
           lazy-src="https://picsum.photos/id/11/10/6"
           max-height="100"
-            @click="irClase('https://maritzabelserna.wixsite.com/my-site-8', 2)"
+          @click="irClase('https://maritzabelserna.wixsite.com/my-site-8', 2)"
           src="../../../assets/lecciones/1.png"
         ></v-img>
       </v-col>
@@ -58,7 +76,7 @@
 
     <div v-else>
       <v-row class="mr-5 ml-5 mt-10">
-        <v-col class="img-game " style="margin-top: 30px">
+        <v-col class="img-game bloqueado" style="margin-top: 30px">
           <h1>Genética</h1>
           <v-img
             lazy-src="https://picsum.photos/id/11/10/6"
@@ -71,11 +89,8 @@
 
     <div v-if="levelcan > 3">
       <v-row class="mr-5 ml-5 mt-10">
-        <v-col
-          class="img-game "
-          style="margin-top: 10px; margin-bottom: 60px"
-        >
-          <h1>Ecosistemas</h1>
+        <v-col class="img-game" style="margin-top: 10px; margin-bottom: 60px">
+          <h1>Relaciones</h1>
 
           <v-img
             @click="irClase('https://veraamaya715.wixsite.com/my-site-1', 4)"
@@ -93,7 +108,7 @@
           class="img-game bloqueado"
           style="margin-top: 10px; margin-bottom: 60px"
         >
-          <h1>Ecosistemas</h1>
+          <h1>Relaciones</h1>
 
           <v-img
             lazy-src="https://picsum.photos/id/11/10/6"
@@ -103,6 +118,28 @@
         </v-col>
       </v-row>
     </div>
+    <v-dialog v-model="modal">
+      <v-card>
+        <v-card-text>
+          <v-row class="mt-2">
+            <v-col>
+              <v-img
+                src="../../../assets/personajes/Certificado Phylum..jpg"
+              ></v-img>
+            </v-col>
+
+            <v-col> </v-col>
+          </v-row>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="modal = false"> Close </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -114,40 +151,44 @@ export default {
   data() {
     return {
       usuario: this.$store.state.usuariobd,
-      levelcan:this.$store.state.usuariobd.level,
+      levelcan: 0,
+      modal: false,
     };
   },
   setup() {},
-    mounted() {
+  mounted() {
     this.loadPerfil2();
   },
   methods: {
     irClase(index, levelcan2) {
-      var win = window.open(index, "_blank");
-      win.focus();
+      // var win = window.open(index, "");
+      // win.focus();
+      window.location.href = index;
       var usr = firebase.auth().currentUser;
 
       var db = firebase.firestore();
       var us = this.usuario;
       console.log(this.usuario);
-      console.log(this.levelcan);
       //var level = this.usuario.level;
-
-
-        this.ref = db
-          .collection("user")
-          .doc(usr.email)
-          .set({
-            avatar: us.avatar,
-            edad: us.edad,
-            exp: us.exp + 10,
-            level: levelcan2,
-            sexo: us.sexo,
-            username: us.username,
-          });
-        this.loadPerfil2();
-          this.$router.push("/games");
-
+      if (levelcan2 < this.levelcan) {
+        levelcan2 = this.levelcan;
+      }
+      this.ref = db
+        .collection("user")
+        .doc(usr.email)
+        .set({
+          avatar: us.avatar,
+          edad: us.edad,
+          exp: us.exp + 10,
+          level: levelcan2,
+          sexo: us.sexo,
+          username: us.username,
+        });
+      this.loadPerfil2();
+      this.$store.commit("lvlAdd", levelcan2);
+      this.levelcan = levelcan2
+      console.log(this.levelcan);
+      // this.$router.push("/games");
     },
     loadPerfil2() {
       // this.isLoading = true;
@@ -165,6 +206,7 @@ export default {
             //console.log(querySnapshot.data());
             var data = querySnapshot.data();
             this.$store.commit("agregarUserbd", data);
+            this.$store.commit("lvlAdd", data.level);
             this.usuario = data;
             this.levelcan = data.level;
             console.log(this.usuario);
