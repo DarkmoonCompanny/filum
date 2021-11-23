@@ -159,7 +159,7 @@
     <!-- Ecosistema -->
     <v-row>
       <v-col class="text-center">
-        <h2>Ecosistemas</h2>
+        <h2>Relaciones</h2>
       </v-col>
     </v-row>
     <v-row>

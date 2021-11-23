@@ -85,7 +85,7 @@
       <v-spacer></v-spacer>
 
       <v-btn>
-        <span>Juegos</span>
+        <span>Practica</span>
         <v-icon>mdi-google-controller</v-icon>
       </v-btn>
       <v-spacer></v-spacer>

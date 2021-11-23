@@ -61,7 +61,7 @@
                                         >
                                           mdi-exit-to-app
                                         </v-icon>
-                                        LogOut
+                                        Salir
                                         </v-btn>
                               </v-col>
                             </v-row>

@@ -155,17 +155,6 @@
                 @click="select_avatar('10.png')"
               ></v-img>
             </v-col>
-
-            <v-col>
-              <v-img
-                max-height="500"
-                max-width="200"
-                src="../../assets/personajes/11.png"
-                @click="select_avatar('11.png')"
-              ></v-img>
-            </v-col>
-          </v-row>
-          <v-row>
             <v-col>
               <v-img
                 max-height="500"
@@ -174,7 +163,8 @@
                 @click="select_avatar('12.png')"
               ></v-img>
             </v-col>
-
+          </v-row>
+          <v-row>
             <v-col>
               <v-img
                 max-height="500"

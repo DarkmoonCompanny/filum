@@ -1,5 +1,17 @@
 <template>
   <div>
+    <v-row>
+      <v-spacer></v-spacer>
+
+      <v-col class="mt-5">
+        <v-alert shaped dark color="info">
+          Recuerda que nuestros juegos de profundización están dentro de cada
+          unidad. Te invitamos a conocerlos!
+        </v-alert>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
+    
     <v-row v-if="levelcan > 3">
       <v-spacer></v-spacer>
 
@@ -12,7 +24,7 @@
           fab
           dark
         >
-          <v-icon>mdi-eye</v-icon> 
+          <v-icon>mdi-eye</v-icon>
         </v-btn>
         Ver Certificado
       </v-col>
@@ -186,7 +198,7 @@ export default {
         });
       this.loadPerfil2();
       this.$store.commit("lvlAdd", levelcan2);
-      this.levelcan = levelcan2
+      this.levelcan = levelcan2;
       console.log(this.levelcan);
       // this.$router.push("/games");
     },
