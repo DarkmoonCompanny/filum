@@ -1,4 +1,4 @@
-# filum
+# Filum
 
 ## Project setup
 ```
